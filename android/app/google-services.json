@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "664085002330",
+    "project_id": "flutter-hackathon-prac",
+    "storage_bucket": "flutter-hackathon-prac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664085002330:android:0d30471961105a3b5c4063",
+        "android_client_info": {
+          "package_name": "com.example.flutter_hackathon_prac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664085002330-ikt4s40b9b52uafbe8vaj73r06kamfjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdRwK8Xrq7_a7T-TuVLd08S8L9jZv3AFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664085002330-ikt4s40b9b52uafbe8vaj73r06kamfjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
