@@ -45,7 +45,49 @@ class _HomeState extends State<Home> {
         title: Text("Welcome ${this.name}"),
         centerTitle: true,
         backgroundColor: Colors.primaries[7],
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.cyan,
+              ),
+              child: Text('Logged In User Info'),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed("/home");
+              },
+            ),
+            ListTile(
+              title: const Text('Profile'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed("/profile");
+              },
+            ),
+            ListTile(
+              title: const Text('Search'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed("/search");
+              },
+            ),
+            ListTile(
+              title: const Text('Favorite'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).pushNamed('/favorite');
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
         child: ElevatedButton(
