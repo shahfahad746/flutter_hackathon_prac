@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_hackathon_prac/screens/drawer/favorite.dart';
 import 'package:flutter_hackathon_prac/screens/drawer/profile.dart';
 import 'package:flutter_hackathon_prac/screens/drawer/search.dart';
 
 import 'package:flutter_hackathon_prac/screens/home.dart';
 import 'package:flutter_hackathon_prac/screens/login.dart';
+import 'package:flutter_hackathon_prac/screens/news/newsDetail.dart';
 import 'package:flutter_hackathon_prac/screens/register.dart';
 
-import 'screens/splashscreen.dart';
+// import 'screens/splashscreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +17,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.primaries[7],
-        accentColor: Colors.white,
+        // accentColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
       home: Home(),
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         "/profile": (context) => Profile(),
         "/search": (context) => Search(),
         "/favorite": (context) => Favorite(),
+        "/newsDetail": (context) => NewsDetail(),
         "/login": (context) => Login(),
         "/register": (context) => Register()
       },

@@ -17,6 +17,5 @@ class _FavoriteState extends State<Favorite> {
         backgroundColor: Colors.cyan,
       ),
     );
-    ;
   }
 }

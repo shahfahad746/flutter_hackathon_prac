@@ -74,12 +74,12 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<List<News>> fetchNews() async {
+  Future<List<News>> fetchNews(String category) async {
     final http.Response response = await http.get(Uri.parse(
-        'http://api.mediastack.com/v1/news?access_key=170f155d1ecac0c555d093f162068211&languages=en&source=health&limit=5'));
+        'https://newsapi.org/v2/top-headlines?country=us&apiKey=23dbfee9030c46e5b71cf9411de3792c&category=$category&pageSize=10'));
 
     final Map<String, dynamic> body = jsonDecode(response.body);
-    List<dynamic> data = body['data'];
+    List<dynamic> data = body['articles'];
 
     List<News> news = data.map((item) => News.fromJson(item)).toList();
     print("Result >>> $news");
@@ -88,25 +88,31 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    // TODO: implement initState
     this.userLoggedIn();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           // title: Text("Welcome ${this.name}"),
           centerTitle: true,
           backgroundColor: Colors.primaries[7],
           bottom: const TabBar(
+            labelColor: Colors.white,
             tabs: [
               Tab(
+                text: 'Top Headlines',
+                icon: Icon(Icons.update),
+              ),
+              Tab(
                 text: 'Sports',
-                icon: Icon(Icons.directions_car),
+                icon: Icon(Icons.sports_outlined),
               ),
               Tab(
                 text: 'Health',
@@ -186,7 +192,67 @@ class _HomeState extends State<Home> {
         body: TabBarView(
           children: [
             FutureBuilder(
-              future: fetchNews(),
+              future: fetchNews('general'),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Stack(
+                    children: [
+                      ListView(
+                        children: [
+                          for (var i = 0; i < snapshot.data.length; i++)
+                            if (true)
+                              NewsCard(
+                                news: News(
+                                    title: snapshot.data[i].title,
+                                    description: snapshot.data[i].description,
+                                    image: snapshot.data[i].image),
+                              ),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          width: size.width * 0.8,
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              fillColor: Colors.cyan,
+                              filled: true,
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                              hintText: "Search ..",
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(
+                                  color: Colors.primaries[7],
+                                  width: 25,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  return Text("Error !!!! ${snapshot.error}");
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+            FutureBuilder(
+              future: fetchNews('sports'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView(
@@ -211,7 +277,7 @@ class _HomeState extends State<Home> {
               },
             ),
             FutureBuilder(
-              future: fetchNews(),
+              future: fetchNews('health'),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView(

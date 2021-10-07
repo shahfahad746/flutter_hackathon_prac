@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
         prefs.setString("name", data["name"]);
         prefs.setString("email", data["email"]);
         Navigator.pushNamed(context, "/home");
-        print("User is: ${data}");
+        print("User is: $data");
       } catch (err) {
         print("Error is $err");
       }
